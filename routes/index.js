@@ -13,10 +13,10 @@ router.get('/', function(req, res) {
   res.render('home', { title: 'Home', name: req.query.name, usercontent: req.query.usercontent});
 });
 
-/* GET lfi. */
-router.get('/lfi', function(req, res) {
-  res.render('lfi', { title: 'Home', file: req.query.file});
-});
+// /* GET lfi. */
+// router.get('/lfi', function(req, res) {
+//   res.render('lfi', { title: 'Home', file: req.query.file});
+// });
 
 router.use(command);
 router.use(fileUpload);
