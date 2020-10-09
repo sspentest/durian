@@ -7,6 +7,8 @@ const fileUpload = require('./file-upload')
 const rce = require('./rce');
 const ssti = require('./ssti');
 const xml = require('./xml');
+const user = require('./user');
+const xss = require('./xss');
 
 
 /* GET home page. */
@@ -24,5 +26,6 @@ router.use(fileUpload);
 router.use(rce);
 router.use(ssti);
 router.use(xml);
+router.use(xss);
 
 module.exports = router;

@@ -37,7 +37,15 @@ router.get('/xpath', function(req, res) {
     
     const userid = req.query.userid;
 
-    const element = xpath.select("//user[userid/text()='" + userid + "']", doc);
+    // const query = xpath.parse("//user[userid/text()=$userid]");
+    const query = xpath.parse("//user[userid/text()='" + userid + "']");
+
+    const element = query.select({
+            node: doc,
+            variables: {
+                userid: userid
+            }        
+        });
 
     res.render('xml', {title: 'XPath Query Results', result: element.toString()})
 });
