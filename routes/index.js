@@ -6,6 +6,7 @@ const command = require('./command');
 const fileUpload = require('./file-upload')
 const rce = require('./rce');
 const ssti = require('./ssti');
+const xml = require('./xml');
 
 
 /* GET home page. */
@@ -22,5 +23,6 @@ router.use(command);
 router.use(fileUpload);
 router.use(rce);
 router.use(ssti);
+router.use(xml);
 
 module.exports = router;
