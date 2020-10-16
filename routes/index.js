@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const command = require('./command');
-const fileUpload = require('./file-upload')
+const files = require('./files')
 const rce = require('./rce');
 const ssti = require('./ssti');
 const xml = require('./xml');
@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
 // });
 
 router.use(command);
-router.use(fileUpload);
+router.use(files);
 router.use(rce);
 router.use(ssti);
 router.use(xml);
