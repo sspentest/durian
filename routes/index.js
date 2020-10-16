@@ -10,11 +10,19 @@ const xml = require('./xml');
 const user = require('./user');
 const xss = require('./xss');
 
+// the following is vulnerable to a format string injection. The following places a `NaN` in the logs: `http://localhost:3000/test?format=%f`
+router.all('/', function(req, res, next) {
+  const ip = req.connection.remoteAddress;
+  console.log("URL: " + req.url, ip);
+  next();
+});
 
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('home', { title: 'Home', name: req.query.name, usercontent: req.query.usercontent});
 });
+
+
 
 // /* GET lfi. */
 // router.get('/lfi', function(req, res) {
