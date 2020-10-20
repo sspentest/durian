@@ -9,6 +9,9 @@ const ssti = require('./ssti');
 const xml = require('./xml');
 const user = require('./user');
 const xss = require('./xss');
+const ssrf = require('./ssrf');
+const openRedirect = require('./open-redirect');
+// const polluted = require('./polluted');
 
 // the following is vulnerable to a format string injection. The following places a `NaN` in the logs: `http://localhost:3000/test?format=%f`
 router.all('/', function(req, res, next) {
@@ -35,5 +38,8 @@ router.use(rce);
 router.use(ssti);
 router.use(xml);
 router.use(xss);
+router.use(ssrf);
+router.use(openRedirect);
+// router.use(polluted);
 
 module.exports = router;
