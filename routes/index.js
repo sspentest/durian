@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const command = require('./command');
+const {cat, cmd, environ, indirect} = require('./command');
 const files = require('./files')
 const rce = require('./rce');
 const ssti = require('./ssti');
@@ -12,6 +12,7 @@ const xss = require('./xss');
 const ssrf = require('./ssrf');
 const openRedirect = require('./open-redirect');
 // const polluted = require('./polluted');
+// const logic = require('./logic');
 
 // the following is vulnerable to a format string injection. The following places a `NaN` in the logs: `http://localhost:3000/test?format=%f`
 router.all('/', function(req, res, next) {
@@ -20,9 +21,16 @@ router.all('/', function(req, res, next) {
   next();
 });
 
+
+
+// const vulnerabilities = [{
+//     title: "Command Injection",
+
+// }];
+
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('home', { title: 'Home', name: req.query.name, usercontent: req.query.usercontent});
+  res.render('home', {title: 'Home'});
 });
 
 
@@ -32,14 +40,23 @@ router.get('/', function(req, res) {
 //   res.render('lfi', { title: 'Home', file: req.query.file});
 // });
 
-router.use(command);
-router.use(files);
+// router.use(command);
+router.get('/cmd', cmd);
+router.get('/cat', cat);
+router.get('/environ', environ);
+router.get('/indirect', indirect);
+
+router.get('/redirect', openRedirect);
+
 router.use(rce);
+router.use(files);
 router.use(ssti);
 router.use(xml);
 router.use(xss);
 router.use(ssrf);
-router.use(openRedirect);
+router.use(user);
 // router.use(polluted);
+// router.use(logic);
+
 
 module.exports = router;

@@ -32,4 +32,15 @@ router.get('/vm', function(req, res) {
     res.send(result);
 });
 
+
+// http://localhost:3000/dynamic-method?method=eval&args=console.log(123)
+router.get('/dynamic-method', (req, res) => {
+  const method = req.query.method;
+  const args = req.query.args;
+
+  const result = globalThis[method](args);
+
+  res.send(result);
+});
+
 module.exports = router;
